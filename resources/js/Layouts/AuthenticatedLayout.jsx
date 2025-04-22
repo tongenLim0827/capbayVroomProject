@@ -7,6 +7,7 @@ import { useState } from 'react';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
+    const isAdmin = user.isSalesAgent;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -26,26 +27,41 @@ export default function AuthenticatedLayout({ header, children }) {
                                 </h2>
                             </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('booking')}
-                                    active={route().current('booking')}
-                                >
-                                    Book an appointment
-                                </NavLink>
-                            </div>
+                            {
+                                isAdmin ?
+                                <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href={route('tracker.index')}
+                                            active={route().current('tracker.index')}
+                                        >
+                                            View booking history
+                                        </NavLink>
+                                    </div>
+                                :
+                                <div className="flex items-center">
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href={route('booking')}
+                                            active={route().current('booking')}
+                                        >
+                                            Book an appointment
+                                        </NavLink>
+                                    </div>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink
-                                    href={route('history')}
-                                    active={route().current('history')}
-                                >
-                                    View booking history
-                                </NavLink>
-                            </div>
+                                    <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                                        <NavLink
+                                            href={route('history')}
+                                            active={route().current('history')}
+                                        >
+                                            View booking history
+                                        </NavLink>
+                                    </div>
+                                </div>
+                            }
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
+                            {isAdmin && <div className='inline-block px-3 py-1 rounded-full text-sm font-medium bg-orange-300 text-white'>Admin</div>}
                             <div className="relative ms-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -173,8 +189,9 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
             </nav>
-            
-            <main className='bg-blue-100 min-h-screen'>{children}</main>
+
+            <main className='min-h-screen' style={{ backgroundImage: "url('https://static.vecteezy.com/system/resources/previews/005/880/500/non_2x/background-with-blue-gradient-free-vector.jpg')" }}>
+            {children}</main>
         </div>
     );
 }
