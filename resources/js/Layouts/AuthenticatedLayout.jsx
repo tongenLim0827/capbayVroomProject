@@ -173,15 +173,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 </div>
             </nav>
-
-            {/* {header && (
-                <header className="bg-white shadow  bg-blue-100">
-                    <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                        {header}
-                    </div>
-                </header>
-            )} */}
-
+            
             <main className='bg-blue-100 min-h-screen'>{children}</main>
         </div>
     );

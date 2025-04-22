@@ -9,15 +9,21 @@ import { useEffect, useState } from 'react';
 export default function Booking() {
     const user = usePage().props.auth.user;
     const [isSubmitSuccess, setIsSubmitSuccess] = useState(false);
+    const [loanAmount, setLoanAmount] = useState(200000);
     const { data, setData, post, processing, errors, reset } = useForm({
             name: user.name,
             email: user.email,
             phone_no: user.phone_no,
             is_purchased: true,
+            downpayment_amount_paid: 0,
             downpayment_amount: 0,
-            loan_amount: 0,
+            loan_amount: loanAmount,
+            process_status: 'SUBMITTED'
         });
 
+    useEffect(() => {
+        setData('loan_amount', loanAmount - data.downpayment_amount)
+    }, [data.downpayment_amount]);
     const submit = (e) => {
         e.preventDefault();
 
@@ -25,7 +31,7 @@ export default function Booking() {
             onSuccess: () => {
                 setIsSubmitSuccess(true);
             },
-            onFinish: () => reset('downpayment_amount', 'loan_amount'),
+            onFinish: () => reset('downpayment_amount_paid', 'downpayment_amount', 'loan_amount'),
         });
     };
 
@@ -95,9 +101,8 @@ export default function Booking() {
                                     id="phone_no"
                                     name="phone_no"
                                     value={data.phone_no}
-                                    className="mt-1 block w-full"
-                                    autoComplete="phone_no"
-                                    onChange={(e) => setData('phone_no', e.target.value)}
+                                    className="mt-1 block w-full bg-gray-100 text-gray-500 cursor-not-allowed"
+                                    disabled={true}
                                     required
                                 />
                             </div>
@@ -121,6 +126,19 @@ export default function Booking() {
                                 data.is_purchased ?
                                 <div className="space-y-6">
                                     <div>
+                                        <InputLabel htmlFor="downpayment_amount_paid" value="Downpayment Amount (PAID)" />
+
+                                        <TextInput
+                                            id="downpayment_amount_paid"
+                                            name="downpayment_amount_paid"
+                                            value={data.downpayment_amount_paid}
+                                            className="mt-1 block w-full"
+                                            onChange={(e) => setData('downpayment_amount_paid', Number(e.target.value))}
+                                            required
+                                        />
+                                    </div>
+
+                                    <div>
                                         <InputLabel htmlFor="downpayment_amount" value="Downpayment Amount" />
 
                                         <TextInput
@@ -140,8 +158,8 @@ export default function Booking() {
                                             id="loan_amount"
                                             name="loan_amount"
                                             value={data.loan_amount}
-                                            className="mt-1 block w-full"
-                                            onChange={(e) => setData('loan_amount', Number(e.target.value))}
+                                            className="mt-1 block w-full bg-gray-100 text-gray-500 cursor-not-allowed"
+                                            disabled={true}
                                             required
                                         />
                                     </div>

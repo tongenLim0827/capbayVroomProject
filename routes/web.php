@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Booking;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -23,7 +25,12 @@ Route::get('/booking', function () {
 })->middleware(['auth', 'verified'])->name('booking');
 
 Route::get('/history', function () {
-    return Inertia::render('History');
+    $user = Auth::user();
+    $bookings = Booking::where('user_id', $user->id)->get();
+
+    return Inertia::render('History', [
+        'bookings' => $bookings
+    ]);
 })->middleware(['auth', 'verified'])->name('history');
 
 Route::middleware('auth')->group(function () {

@@ -17,12 +17,15 @@ class Booking extends Model
      * @var list<string>
      */
     protected $fillable = [
+        'user_id',
         'name',
         'email',
         'phone_no',
         'is_purchased',
+        'downpayment_amount_paid',
         'downpayment_amount',
-        'loan_amount'
+        'loan_amount',
+        'process_status'
     ];
 
     /**
@@ -32,6 +35,7 @@ class Booking extends Model
      */
     protected $hidden = [
         // 'password',
+        'user_id',
         'remember_token',
     ];
 
@@ -45,8 +49,14 @@ class Booking extends Model
         return [
             'is_purchased' => 'boolean',
             'downpayment_amount' => 'decimal:2',
+            'downpayment_amount_paid' => 'decimal:2',
             'loan_amount' => 'decimal:2',
             'booking_registered_at' => 'datetime',
         ];
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

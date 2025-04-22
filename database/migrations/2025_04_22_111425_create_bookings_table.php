@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
+            $table->string('user_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone_no');
+            $table->unsignedInteger('downpayment_amount_paid');
+            $table->boolean('promotion_eligibility')->default(false);
+            $table->string('process_status');
             $table->boolean('is_purchased')->default(false);
             $table->decimal('downpayment_amount', 10, 2)->nullable();
             $table->decimal('loan_amount', 10, 2)->nullable();
