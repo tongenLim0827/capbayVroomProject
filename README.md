@@ -1,61 +1,81 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+## Author Details
+* Author: Lim Tong En
+* Created On: 22/4/2025
+* Last Updated On: 23/4/2025
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## About
 
-## About Laravel
+This project is a full-stack web application developed as part of a technical assessment by CapBay. The application is build using Laravel framework for backend and React for frontend.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Project background: The system is designed to streamline the vehicles sales process for sales agents from CapBay Auto Sdn Bhd, on their latest AI cat model, Vroom. It will allow the customers to register and book an appointment for the test drive of this new vehicle. Sales agent are also allowed to view the list of registration along with the customer details such as
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- name.
+- car purchase status.
+- amount of down payment paid.
+- amount of down payment.
+- amount of loan.
+- registration date
+- etc.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+This informations are important as it is requuired for the sales agenet to evaluate whether the customer are entitled for a 15% discount on their down payment amount, where the top 10 customers who have purchased the car and paid at least 10% of the down payment will be eligible for the discount.
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Steps to run the application
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- Clone the repository and navigate to the project folder:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+`git clone https://github.com/tongenLim0827/capbayVroomProject.git`
 
-## Laravel Sponsors
+`cd capbayVroom`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Setting up laravel environment: Install PHP dependencies
 
-### Premium Partners
+`composer install`
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+- Configure the env file
 
-## Contributing
+`cp .env.example .env`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+`php artisan key:generate`
 
-## Code of Conduct
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=database_name
+DB_USERNAME=database_username  #most likely is root
+DB_PASSWORD=database_password
+```
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+-  Connect the project to the database: Create a database at Dbeaver (or any of your preferred database GUI) and make sure the following settings are configured in order establish the connection. Select MySQL as the database
+```
+Host: 127.0.0.1
+Port Number: 3306
+Database: database_name
+Username: database_username
+Password: database_password
+```
+- Run migrations
 
-## License
+`php artisan migrate`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+- Install frontend dependencies
+
+`npm install`
+
+- Start the backend and frontend server
+
+`php artisan serve`
+
+`npm run dev`
+
+Now the application is served at <Link>http://127.0.0.1:8000</Link>
+
+## Using the application
+To distinguish the UI view for admin (Sales Agent) and guest (customer), we have to manually change the value for isSalesAgent at the database where 1 represents the current user is a sales agent and 0 represents normal customer.
+
+For a Sales Agent, they are able to view the list of registration for the CapBay Vroom test drive and also evaluate whether the customer is eligible for promotion. If the customer is eligible, the sales agent will modify the down payment amount that needs to be paid by the customer
+
+For a customer, they can book an appointment for the test drive and view their booking history later. They can also track their appointment status to see whether it is being processed by the sales agent.

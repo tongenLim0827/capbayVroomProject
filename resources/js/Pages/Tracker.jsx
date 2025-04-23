@@ -55,8 +55,7 @@ export default function Tracker({ bookings }) {
     const eligibleBookings = bookings
         .filter(booking => booking.is_purchased && (booking.downpayment_amount_paid / booking.downpayment_amount) * 100 >= 10)
         .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
-    const topEligibleBookings = eligibleBookings.slice(0, 15);
-
+    const topEligibleBookings = eligibleBookings.slice(0, 10);
 
     return (
         <AuthenticatedLayout
