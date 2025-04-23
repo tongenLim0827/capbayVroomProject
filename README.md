@@ -81,3 +81,5 @@ For a Sales Agent, they are able to view the list of registration for the CapBay
 For a customer, they can book an appointment for the test drive and view their booking history later. They can also track their appointment status to see whether it is being processed by the sales agent.
 
 Sales agent can also perform lookup for the registration based on customer name, creation date or any search items.
+
+The sample output for the system can be found here: <Link>https://github.com/tongenLim0827/capbayVroomProject/blob/main/sample_output.pdf</Link>
