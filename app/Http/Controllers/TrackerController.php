@@ -18,11 +18,9 @@ class TrackerController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Find the booking by ID
         $booking = Booking::findOrFail($id);
 
-        // Validate incoming data
-        $validatedData = $request->validate([
+        $updated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone_no' => 'required|string|max:20',

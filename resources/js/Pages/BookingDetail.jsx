@@ -4,7 +4,6 @@ import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 
 export default function BookingDetail({ booking, isEdit, setShowModal, setIsEdit, isEligible }) {
-    // const [editedBooking, setEditedBooking] = useState({ ...booking });
     const bgColor = isEligible ? 'bg-green-500 text-white' : 'bg-red-500 text-white';
 
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({

@@ -14,7 +14,6 @@ export default function Tracker({ bookings }) {
     const [isEligible, setIsEligible] = useState(false);
 
     useEffect(() => {
-        // Re-filter bookings whenever the list of bookings changes
         setFilteredBookings(
             bookings.filter(booking => {
                 // Convert the search term to lowercase for case-insensitive comparisons
