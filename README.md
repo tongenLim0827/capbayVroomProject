@@ -7,7 +7,7 @@
 
 This project is a full-stack web application developed as part of a technical assessment by CapBay. The application is build using Laravel framework for backend and React for frontend.
 
-Project background: The system is designed to streamline the vehicles sales process for sales agents from CapBay Auto Sdn Bhd, on their latest AI cat model, Vroom. It will allow the customers to register and book an appointment for the test drive of this new vehicle. Sales agent are also allowed to view the list of registration along with the customer details such as
+Project background: The system is designed to streamline the vehicles sales process for sales agents from CapBay Auto Sdn Bhd, on their latest AI car model, Vroom. It will allow the customers to register and book an appointment for the test drive of this new vehicle. Sales agent are also allowed to view the list of registration along with the customer details such as
 
 - name.
 - car purchase status.
@@ -79,3 +79,5 @@ To distinguish the UI view for admin (Sales Agent) and guest (customer), we have
 For a Sales Agent, they are able to view the list of registration for the CapBay Vroom test drive and also evaluate whether the customer is eligible for promotion. If the customer is eligible, the sales agent will modify the down payment amount that needs to be paid by the customer
 
 For a customer, they can book an appointment for the test drive and view their booking history later. They can also track their appointment status to see whether it is being processed by the sales agent.
+
+Sales agent can also perform lookup for the registration based on customer name, creation date or any search items.
